@@ -1,5 +1,6 @@
 // src/components/CategoryList.jsx
 import React from "react";
+import { cleanCategoryName } from "../cleanCategoryName";
 
 const CategoryList = ({ categories, selectedCategory, onCategorySelect }) => {
   return (
@@ -10,7 +11,7 @@ const CategoryList = ({ categories, selectedCategory, onCategorySelect }) => {
           onClick={() => onCategorySelect(category)}
           className={selectedCategory === category ? "active" : ""}
         >
-          {category.replace("FAKE: ", "")}
+          {cleanCategoryName(category)}
         </button>
       ))}
     </div>
@@ -18,3 +19,4 @@ const CategoryList = ({ categories, selectedCategory, onCategorySelect }) => {
 };
 
 export default CategoryList;
+
