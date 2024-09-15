@@ -15,7 +15,7 @@ describe("Navigation", () => {
      * The `should` part is your assertions and they should look familiar to what you have learned before.
      * Here we are checking that there are 20 products in the list!
      */
-    cy.get('[data-testid="product-link"]').should("have.length", 20);
+    cy.get('[data-testid="product-link"]').should("have.length", 20)
 
     /**
      * Now let's interact with our page.
