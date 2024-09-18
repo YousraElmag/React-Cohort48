@@ -15,7 +15,7 @@ const ProductDetail = () => {
         setLoading(false);
       })
       .catch((error) => {
-        setError("Failed to load product details.");
+        setError("Failed to load product details.")
         setLoading(false);
       });
   }, [id]);

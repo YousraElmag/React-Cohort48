@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from "react";
 import CategoryList from "./components/CategoryList";
 import ProductList from "./components/ProductList";
