@@ -29,9 +29,9 @@ function ProductList() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
+    <div className='all'>
       {products.map(product => (
-        <div key={product.id}>
+        <div className='box'  key={product.id}>
           <Link to={`/product/${product.id}`}>
             <h2>{product.title}</h2>
             <p>{product.description}</p>

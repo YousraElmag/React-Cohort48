@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ProductList from './components/productlist';
-import ProductDetail from './components/ ProductDetail';
+import ProductList from './components/Productlist';
+import ProductDetail from './components/ ProductDetail'
 import FavoritesPage from './components/FavoritesPage';
-import CategoryList from './components/categorylist';
+import Navbar from './components/Navbar'; 
 import { FavoritesProvider } from './components/FavoritesContext';
 
 function App() {
   return (
     <FavoritesProvider>
       <Router>
-        <CategoryList />
+        <Navbar /> 
         <Routes>
           <Route path="/" element={<ProductList />} />
           <Route path="/category/:categoryId" element={<ProductList />} />

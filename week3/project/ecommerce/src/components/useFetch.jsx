@@ -7,15 +7,23 @@ function useFetch(url) {
 
   useEffect(() => {
     setLoading(true);
+    setError(null); 
+
     fetch(url)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         setData(data);
-        setLoading(false);
       })
       .catch(err => {
         setError(err);
-        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false); 
       });
   }, [url]);
 
@@ -23,3 +31,4 @@ function useFetch(url) {
 }
 
 export default useFetch;
+

@@ -25,7 +25,7 @@ function ProductDetail() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
+    <div className='product-card'>
       {product && (
         <>
           <h2>{product.title}</h2>

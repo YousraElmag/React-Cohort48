@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import useFetch from './useFetch'; // Ensure the path is correct
 
 function CategoryList() {
-  const [categories, setCategories] = useState([]);
+  const { data: categories, loading, error } = useFetch('https://fakestoreapi.com/products/categories');
 
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products/categories')
-      .then(response => response.json())
-      .then(data => setCategories(data))
-      .catch(err => console.error(err));
-  }, []);
+  if (loading) return <p>Loading categories...</p>;
+  if (error) return <p>Error loading categories: {error.message}</p>;
 
   return (
-    <nav>
-      <ul>
-        {categories.map(category => (
-          <li key={category}>
-            <Link to={`/category/${category}`}>{category}</Link>
-          </li>
-        ))}
-        <li>
-          <Link to="/favourites">Favourites</Link>
+    <ul>
+      {categories.map(category => (
+        <li key={category}>
+          <Link to={`/category/${category}`}>{category}</Link>
         </li>
-      </ul>
-    </nav>
+      ))}
+    </ul>
   );
 }
 
 export default CategoryList;
+
