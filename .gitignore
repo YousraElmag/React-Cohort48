@@ -1,6 +1,0 @@
-# /*
-
-# # Except the folder you want to keep
-# !/ecommerce/
-# !/ecommerce/**/*
-node_modules
