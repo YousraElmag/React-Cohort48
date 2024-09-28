@@ -33,7 +33,7 @@ const ProductDetail = () => {
   }
 
   return (
-    <div>
+    <div className="product-card">
       <h1>{product.title}</h1>
       <img src={product.image} alt={product.title} />
       <p>{product.description}</p>

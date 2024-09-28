@@ -1,32 +1,35 @@
-
 import React, { useState, useEffect } from "react";
 import CategoryList from "./components/CategoryList";
 import ProductList from "./components/ProductList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ProductDetail from "./components/ ProductDetail";
+import ProductDetail from './components/ ProductDetail';
 
 const App = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [categoryError, setCategoryError] = useState(null);
+  const [productError, setProductError] = useState(null);
 
+  // Fetch categories
   useEffect(() => {
     fetch("https://fakestoreapi.com/products/categories")
       .then((response) => response.json())
       .then((data) => {
         setCategories(data);
-        setLoading(false);
+        setLoadingCategories(false);
       })
-      .catch((error) => {
-        setError("Failed to load categories.");
-        setLoading(false);
+      .catch(() => {
+        setCategoryError("Failed to load categories.");
+        setLoadingCategories(false);
       });
   }, []);
 
+  // Fetch products based on selected category
   useEffect(() => {
-    setLoading(true);
+    setLoadingProducts(true);
     const url = selectedCategory
       ? `https://fakestoreapi.com/products/category/${selectedCategory}`
       : "https://fakestoreapi.com/products";
@@ -35,32 +38,49 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
-        setLoading(false);
+        setLoadingProducts(false);
       })
-      .catch((error) => {
-        setError("Failed to load products.");
-        setLoading(false);
+      .catch(() => {
+        setProductError("Failed to load products.");
+        setLoadingProducts(false);
       });
   }, [selectedCategory]);
 
-  if (loading) {
+  // Loading states
+  if (loadingCategories || loadingProducts) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>{error}</div>;
+  // Error handling
+  if (categoryError || productError) {
+    return (
+      <div>
+        {categoryError && <div>{categoryError}</div>}
+        {productError && <div>{productError}</div>}
+      </div>
+    );
   }
 
   return (
     <Router>
       <div className="App">
-        <CategoryList
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategorySelect={setSelectedCategory}
-        />
         <Routes>
-          <Route path="/" element={<ProductList products={products} />} />
+          <Route
+            path="/"
+            element={
+              <>
+                {/* Render category list if no error */}
+                <CategoryList
+                  categories={categories}
+                  selectedCategory={selectedCategory}
+                  onCategorySelect={setSelectedCategory}
+                />
+                
+                {/* Render product list if no error */}
+                <ProductList products={products} />
+              </>
+            }
+          />
           <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
       </div>

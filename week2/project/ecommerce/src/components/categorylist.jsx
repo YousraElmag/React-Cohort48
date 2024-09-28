@@ -1,4 +1,3 @@
-// src/components/CategoryList.jsx
 import React from "react";
 
 const CategoryList = ({ categories, selectedCategory, onCategorySelect }) => {
@@ -10,7 +9,7 @@ const CategoryList = ({ categories, selectedCategory, onCategorySelect }) => {
           onClick={() => onCategorySelect(category)}
           className={selectedCategory === category ? "active" : ""}
         >
-          {category.replace("FAKE: ", "")}
+          {category}
         </button>
       ))}
     </div>
