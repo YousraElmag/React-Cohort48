@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useFetch from './useFetch'; // Ensure the path is correct
+import useFetch from './UseFetch'; // Ensure the path is correct
 
 function CategoryList() {
   const { data: categories, loading, error } = useFetch('https://fakestoreapi.com/products/categories');
