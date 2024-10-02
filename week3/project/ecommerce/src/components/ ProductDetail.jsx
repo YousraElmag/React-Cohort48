@@ -5,7 +5,7 @@ import heartSolid from '/Users/yousraelmaghraby/React-Cohort48/week3/project/ass
 import { useFavorites } from './FavoritesContext';
 
 function ProductDetail() {
-  const { favorites, addFavorite, removeFavorite } = useFavorites(); // Move this inside the component
+  const { favorites, addFavorite, removeFavorite } = useFavorites(); 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ function ProductDetail() {
       });
   }, [id]);
 
-  const isFavorite = favorites.includes(product?.id); // Check if the product is a favorite
+  const isFavorite = favorites.includes(product?.id); 
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
