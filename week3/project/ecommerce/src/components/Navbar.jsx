@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CategoryList from './Categorylist'
 
-const Navbar = () => {
+const NavBar = () => {
   return (
     <nav>
       <ul>
@@ -20,4 +20,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;

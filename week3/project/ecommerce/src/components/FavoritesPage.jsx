@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFavorites } from './FavoritesContext';
-import heartRegular from '../assets/heart-regular.svg';
-import heartSolid from '../assets/heart-solid.svg';
+import heartRegular from '/Users/yousraelmaghraby/React-Cohort48/week3/project/assets/heart-regular.svg';
+import heartSolid from '/Users/yousraelmaghraby/React-Cohort48/week3/project/assets/heart-solid.svg';
 
 function FavoritesPage() {
   const { favorites, addFavorite, removeFavorite } = useFavorites();

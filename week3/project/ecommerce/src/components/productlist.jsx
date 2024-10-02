@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useFavorites } from './FavoritesContext';
-import heartRegular from '../assets/heart-regular.svg';
-import heartSolid from '../assets/heart-solid.svg';
+import heartRegular from '/Users/yousraelmaghraby/React-Cohort48/week3/project/assets/heart-regular.svg';
+import heartSolid from '/Users/yousraelmaghraby/React-Cohort48/week3/project/assets/heart-solid.svg';
 
 function ProductList() {
   const [products, setProducts] = useState([]);
