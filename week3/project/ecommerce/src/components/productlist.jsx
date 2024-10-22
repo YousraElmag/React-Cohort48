@@ -1,37 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useFavorites } from './FavoritesContext';
-import heartRegular from '/Users/yousraelmaghraby/React-Cohort48/week3/project/assets/heart-regular.svg';
-import heartSolid from '/Users/yousraelmaghraby/React-Cohort48/week3/project/assets/heart-solid.svg';
+import heartRegular from '/path/to/heart-regular.svg';
+import heartSolid from '/path/to/heart-solid.svg';
+import useFetch from './useFetch';  // Import your custom hook
 
 function ProductList() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const { categoryId } = useParams();
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(categoryId ? `https://fakestoreapi.com/products/category/${categoryId}` : 'https://fakestoreapi.com/products')
-      .then(response => response.json())
-      .then(data => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err);
-        setLoading(false);
-      });
-  }, [categoryId]);
+  // Use the custom hook to fetch products
+  const url = categoryId 
+    ? `https://fakestoreapi.com/products/category/${categoryId}` 
+    : 'https://fakestoreapi.com/products';
 
+  const { data: products, loading, error } = useFetch(url); // Renamed 'data' to 'products' for clarity
+
+  // Handle loading and error states
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className='all'>
-      {products.map(product => (
-        <div className='box'  key={product.id}>
+      {products && products.map(product => (  // Ensure 'products' is not null
+        <div className='box' key={product.id}>
           <Link to={`/product/${product.id}`}>
             <h2>{product.title}</h2>
             <p>{product.description}</p>
@@ -45,7 +37,7 @@ function ProductList() {
                 ? removeFavorite(product.id)
                 : addFavorite(product.id)
             }
-            style={{ cursor: 'pointer', width: '24px', height: '24px' }}
+    
           />
         </div>
       ))}
